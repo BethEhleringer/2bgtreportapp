@@ -66,8 +66,8 @@ module.exports = function(app) {
       pers_spir: req.body.pers_spir,
       pers_emot: req.body.pers_emot,
       pers_health: req.body.pers_health,
-     pers_pr_req: req.body.pers_pr_req
-      
+     pers_pr_req: req.body.pers_pr_req,
+      UserId: req.body.UserId
     }).then(function() {
       res.redirect(307, "/api/members");
     }).catch(function(err) {

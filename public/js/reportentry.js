@@ -4,8 +4,10 @@ var persspirInput = $("input#persspir-input");
 var persemotInput = $("input#persemot-input");
 var pershealthInput = $("input#pershealth-input");
 var persprreqInput = $("input#persprreq-input");
+var UserId = $("input#UserId");
 //var userid = $("#user");
 var currentUser = {};
+//var UserId = currentUser.id
 
 $(document).ready(function() {
 
@@ -15,14 +17,18 @@ $(document).ready(function() {
     currentUser = data;
     $(".member-name").text(currentUser.first_name);
         console.log(currentUser);
-    $(".report-entry").
+    $("<input>").attr({
+      type:"hidden",
+      id: UserId,
+      name: UserId
+    }).appendTo(".report-entry")
   });
   
   
   //NOTE: How can I pass data.first_name and data.id to outside of the function so that 
   //I can save it in the 
   //GET USERID
-  function getUserId() {
+ /* function getUserId() {
     currentUser 
     var queryUrl;
     queryUrl = "/api/user_data";
@@ -31,7 +37,7 @@ $(document).ready(function() {
     });
   }
   getUserId();
-  console.log(userid)
+  console.log(userid)*/
 
   
 
@@ -53,34 +59,38 @@ $(document).ready(function() {
       pers_emot: persemotInput.val(),
      pers_health: pershealthInput.val(),
      pers_pr_req: persprreqInput.val(),
-     userid: userid.val()
+     UserId: UserId
     };
     console.log("reportData captured");
     
     console.log(reportData.pers_pr_req)
-    console.log("User ID: ", reportData.UserId)
+    console.log("User ID: ", currentUser.id)
+    
 
     if (!reportData.pers_spir || !reportData.pers_emot || !reportData.pers_health) {
       return;
     }
     // If we have an entry for pers_spir, run the signUpUser function
     //enterReport(reportData.pers_spir, reportData.pers_emot, reportData.pers_health, reportData.pers_pr_req);
-    enterReport(reportData.pers_spir, reportData.pers_emot, reportData.pers_health, reportData.pers_pr_req);
+    enterReport(reportData.pers_spir, reportData.pers_emot, reportData.pers_health, reportData.pers_pr_req, reportData.UserId);
     persspirInput.val("");
     persemotInput.val("");
     pershealthInput.val("");
     persprreqInput;
+    UserId;
   });
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
-  function enterReport(pers_spir, pers_emot, pers_health, pers_pr_req) {
+  function enterReport(pers_spir, pers_emot, pers_health, pers_pr_req, UserId) {
+    var UserId = currentUser.id;
    // function enterReport(pers_spir, pers_emot, pers_health, pers_pr_req) {
     $.post("/api/reportentry", {
       pers_spir: pers_spir,
      pers_emot: pers_emot,
      pers_health: pers_health,
      pers_pr_req: pers_pr_req,
+     UserId: UserId
       
     }).then(function(data) {
       console.log("abcde")
