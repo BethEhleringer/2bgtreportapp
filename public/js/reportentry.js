@@ -4,6 +4,7 @@ var persspirInput = $("input#persspir-input");
 var persemotInput = $("input#persemot-input");
 var pershealthInput = $("input#pershealth-input");
 var persprreqInput = $("input#persprreq-input");
+// The variable below holds the input from the hidden field.
 var UserId = $("input#UserId");
 //var userid = $("#user");
 var currentUser = {};
