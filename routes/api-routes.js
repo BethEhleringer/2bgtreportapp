@@ -93,6 +93,15 @@ module.exports = function(app) {
     
   });
 
+  // get route for retrieving all reports from the current user
+
+  // get value for current userid
+
+  // show report data where userid === db.User.id
+
+
+  
+
   // get route for retrieving a single report
   app.get("/api/reports/:id", function(req, res) {
       // Here we add an "include" propoerty to our options in our findOne query
