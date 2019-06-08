@@ -10,6 +10,10 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/blog.html"));
   });
 
+  app.get("/temp", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/temp.html"));
+  });
+
   app.get("/", function(req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
