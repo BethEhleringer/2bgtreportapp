@@ -13,6 +13,7 @@ $(document).ready(function() {
     };
 
     if (!userData.email || !userData.password) {
+alert("Please enter a valid email and password.")
       return;
     }
 
@@ -32,6 +33,7 @@ $(document).ready(function() {
       // If there's an error, log the error
     }).catch(function(err) {
       console.log(err);
+      alert("User email and/or password are incorrect. Please try again.")
     });
   }
 

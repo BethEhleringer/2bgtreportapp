@@ -13,14 +13,23 @@ module.exports = function(app) {
   app.get("/temp", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/temp.html"));
   });
-
+/*
   app.get("/", function(req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/reportentry.html");
     }
     res.sendFile(path.join(__dirname, "../public/signup.html"));
   });
+*/
+//
+app.get("/", function(req, res) {
+  // If the user already has an account send them to the members page
+  if (req.user) {
+    res.redirect("/members.html");
+  }
+  res.sendFile(path.join(__dirname, "../public/login.html"));
+});
 
   app.get("/login", function(req, res) {
     // If the user already has an account send them to the members page
