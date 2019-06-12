@@ -1,8 +1,8 @@
 // Getting references to our form and input
-
+var userId
 var selUserReports = {};
-var selUser = {};
-
+//var selUser = {};
+var selUser
 var selUserForm = $("#selUser");
 var memberSelect = $("#member");
  /* var selUser = {
@@ -14,8 +14,7 @@ var memberSelect = $("#member");
 $(document).ready(function() {
   
 // Adding an event listener for when the form is submitted
-$(selUserForm).on("submit", handleFormSubmit);
-var userId
+
 // When form is submitted, 
 function handleFormSubmit(event) {
   event.preventDefault();
@@ -27,6 +26,7 @@ function handleFormSubmit(event) {
   // end function for showing reports of selected member
 
   console.log("Which user was selected? ", SelUser);
+  return SelUser
 }
 
 $(showRep).on("submit", handleFormTwoSubmit);
@@ -57,7 +57,7 @@ function handleFormTwoSubmit(event) {
     console.log(memberSelect);
     memberSelect.append(rowsToAdd);
     memberSelect.val(userId);
-    console.log("I selected ", memberSelect)
+    console.log("I selected ", memberSelect, "!!!")
   }
 
   // Creates the member options in the dropdown
@@ -79,14 +79,16 @@ function handleFormTwoSubmit(event) {
   
 //Get the name of the user who is logged in and display it.
 function showReports() {
+  console.log ("What's ", selUser.id, "???????")
   $("#user-reports").empty();
-  $.get("/api/report_data").then(function(data, UserId) {
+  $.get("/api/report_data").then(function(data) {
     selUserReports = data;
     UserId = memberSelect.val;
     console.log("member select is ", memberSelect.val);
     console.log(data);
     var SelUser
     for (var i = 1; i < selUserReports.length; i++){
+      if (selUserReports[i].UserId === selUser.id) {
       //var SelUser = memberSelect.val();
     
      /* $("#user-reports").append(
@@ -96,6 +98,9 @@ function showReports() {
       $("#user-reports").append(
         "<tr><td>" + selUserReports[i].UserId + "</td><td class='wrap' >" + moment(selUserReports[i].createdAt).format("MMM DD, YYYY") + "</td><td>" + selUserReports[i].pers_pr_req + "</td></tr>"
       )
+    } else
+
+    $("#user-reports").append("none")
   
 
     }
