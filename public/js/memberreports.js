@@ -23,6 +23,12 @@ $(document).ready(function() {
   
   });
 
+  $.get("/api/last_report").then(function(data) {
+    $(".last-report-date").text(moment(data[0].createdAt).format("hh:mm A, MMM DD, YYYY"));
+    console.log("&&&&&&&&&&&&&&&&&&&&&&&&")
+    console.log("&&&&", data);
+  });
+//lastDate();
 
 // Adding an event listener for when the form is submitted
 
@@ -110,14 +116,23 @@ function showReports() {
         "<tr><td>" + selUserReports[i].UserId + "</td><td class='wrap' >" + moment(selUserReports[i].createdAt).format("MMM DD, YYYY") + "</td><td>" + selUserReports[i].pers_pr_req + "</td></tr>"
       )
     } else {}
+   }
+   });
+};
 
-   
-  
+function lastDate() {
+   $.get("/api/last_date").then(function(data) {
+    selUserReports = data;
+    UserId = memberSelect.val;
+    for (var i = 1; i < selUserReports.length; i++){
+      if (selUserReports[i].UserId === selUser.id) {
 
-    }
-   
-}
+      $(".last-report-date").text(
+        moment(selUserReports[i].createdAt).format("HH:MM, MMM DD, YYYY")
+      )
+    } else {}
+   }
+   });
+};
 
-);
-}
 });

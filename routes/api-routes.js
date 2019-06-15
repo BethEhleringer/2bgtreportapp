@@ -109,6 +109,41 @@ module.exports = function (app) {
 
   });
 
+  app.get("/api/last_report", function (req, res) {
+    var query = {};
+    if (req.query.user_id) {
+      req.query.user_id;
+    }
+
+    db.Report.findAll({
+      limit: 1,
+      where: query,
+      order: [ [ 'createdAt', 'DESC']],
+      include: [db.User]
+    }).then(function (dbReport) {
+      res.json(dbReport);
+    });
+
+  });
+
+ /* app.get("/api/last_report", function (req, res) {
+    var query = {};
+    if (req.query.user_id) {
+      req.query.user_id;
+    }
+
+    db.Report.findAll({
+      //limit: 1,
+      where: query,
+      include: [db.User]
+     // order: [ [ 'createAt', 'DESC']]
+    }).then(function (dbReport) {
+      res.json(dbReport);
+    });
+  });
+*/
+  
+
   app.get("/api/asdfasdf", function (req, res) {
     var query = {};
     if (req.query.user_id) {
