@@ -30,7 +30,7 @@ module.exports = function(app) {
 app.get("/", function(req, res) {
   // If the user already has an account send them to the members page
   if (req.user) {
-    res.redirect("/members.html");
+    res.redirect("/memberreports.html");
   }
   res.sendFile(path.join(__dirname, "../public/login.html"));
 });
@@ -38,7 +38,7 @@ app.get("/", function(req, res) {
   app.get("/login", function(req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/memberreports");
     }
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });

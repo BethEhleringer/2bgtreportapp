@@ -23,12 +23,12 @@ $(document).ready(function() {
   
   });
 
-  $.get("/api/last_report").then(function(data) {
+ /* $.get("/api/last_report").then(function(data) {
     $(".last-report-date").text(moment(data[0].createdAt).format("hh:mm A, MMM DD, YYYY"));
     console.log("&&&&&&&&&&&&&&&&&&&&&&&&")
     console.log("&&&&", data);
-  });
-//lastDate();
+  }); */
+lastDate();
 
 // Adding an event listener for when the form is submitted
 
@@ -121,7 +121,13 @@ function showReports() {
 };
 
 function lastDate() {
-   $.get("/api/last_date").then(function(data) {
+  $.get("/api/report_data").then(function(data) {
+    //$.get("/api/last_report").then(function(data) {
+     console.log("KJIHGFEDCBA")
+     console.log(selUser.id)
+     console.log("*******************")
+     console.log(data)
+     console.log("??????<<<<<<<<<<<<???????????")
     selUserReports = data;
     UserId = memberSelect.val;
     for (var i = 1; i < selUserReports.length; i++){
@@ -130,6 +136,7 @@ function lastDate() {
       $(".last-report-date").text(
         moment(selUserReports[i].createdAt).format("HH:MM, MMM DD, YYYY")
       )
+      console.log("ABCDEFGHIJK")
     } else {}
    }
    });
