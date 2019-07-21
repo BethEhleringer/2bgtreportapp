@@ -10,7 +10,7 @@ var memberSelect = $("#member");
      };*/
     // var selUser = $("#member").val().trim();
 
-
+//I NEED TO HAVE A FUNCTION THAT DETERMINES WHETHER OR NOT THE USER HAS SUBMITTED A REPORT.
 $(document).ready(function() {
   
 
@@ -132,11 +132,16 @@ function lastDate() {
     UserId = memberSelect.val;
     for (var i = 1; i < selUserReports.length; i++){
       if (selUserReports[i].UserId === selUser.id) {
-
-      $(".last-report-date").text(
+//THIS IS WHERE I NEED TO PUSH EACH VALUE THAT MEETS THE ABOVE CRITERIA INTO AN ARRAY SO I CAN 
+//COUNT THE LENGTH TO MAKE SURE IT IS NOT -1 AND IF IT IS -1 THEN HAVE A DIFFERENT MESSAGE.
+      if (selUserReports[i].createdAt === undefined) {
+        $(".last-report-date").text("You haven't submitted any reports yet.")
+      } else {
+$(".last-report-date").text(
         moment(selUserReports[i].createdAt).format("HH:MM, MMM DD, YYYY")
-      )
-      console.log("ABCDEFGHIJK")
+      )}
+    
+      console.log("selUserReports.length= ", selUserReports.length)
     } else {}
    }
    });
