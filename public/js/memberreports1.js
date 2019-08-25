@@ -5,7 +5,7 @@ var selUserReports = {};
 var selUser
 var selUserForm = $("#selUser");
 var memberSelect = $("#member");
-var haveSubmitted = 0;
+var submittedReports = 0;
  /* var selUser = {
     UserId: $("#member").val().trim(),
      };*/
@@ -54,9 +54,6 @@ function handleFormTwoSubmit(event) {
   event.preventDefault();
   showReports();
 }
-//When button pushed route user to reportentry.html
-//$(fileRep).on("submit", goToReportEntry)
-
 
     // A function to get Members and then render our list of Members
   function getMembers() {
@@ -107,11 +104,7 @@ function showReports() {
     UserId = memberSelect.val;
     console.log("member select is ", memberSelect.val);
     console.log(data);
-    $("#user-reports").append(
-      "<thead><th>Report Created</th><th>Requests</th></thead>"
-      
-    );
-    //var SelUser
+    var SelUser
     for (var i = 1; i < selUserReports.length; i++){
       if (selUserReports[i].UserId === selUser.id) {
       //var SelUser = memberSelect.val();
@@ -121,7 +114,7 @@ function showReports() {
       ) */
    
       $("#user-reports").append(
-        "<tr><td class='wrap' >" + moment(selUserReports[i].createdAt).format("MMM DD, YYYY") + "</td><td>" + selUserReports[i].pers_pr_req + "</td></tr>"
+        "<tr><td>" + selUserReports[i].UserId + "</td><td class='wrap' >" + moment(selUserReports[i].createdAt).format("MMM DD, YYYY") + "</td><td>" + selUserReports[i].pers_pr_req + "</td></tr>"
       )
     } else {}
    }
@@ -132,7 +125,7 @@ function lastDate() {
   $.get("/api/report_data").then(function(data) {
     //$.get("/api/last_report").then(function(data) {
      console.log("KJIHGFEDCBA")
-     console.log(selUser.id)
+     //console.log(selUser.id)
      console.log("*******************")
      console.log(data)
      console.log("??????<<<<<<<<<<<<???????????")
@@ -142,16 +135,17 @@ function lastDate() {
       if (selUserReports[i].UserId === selUser.id) {
 //THIS IS WHERE I NEED TO PUSH EACH VALUE THAT MEETS THE ABOVE CRITERIA INTO AN ARRAY SO I CAN 
 //COUNT THE LENGTH TO MAKE SURE IT IS NOT -1 AND IF IT IS -1 THEN HAVE A DIFFERENT MESSAGE.
-      if (selUserReports[i].createdAt === undefined) {
-        $(".last-report-date").text("You haven't submitted any reports yet.")
-      } else {
+submittedReports = (submittedReports + 1);
+console.log (submittedReports);
 $(".last-report-date").text(
         moment(selUserReports[i].createdAt).format("HH:MM, MMM DD, YYYY")
-      )}
+      )
     
       console.log("selUserReports.length= ", selUserReports.length)
     } else {}
    }
+   console.log("Submitted reports = " + submittedReports)
+   if (submittedReports === 0) {$(".last-report-date").text("You haven't submitted any reports!")}
    });
 };
 
